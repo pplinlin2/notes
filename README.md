@@ -1,0 +1,1 @@
+- raid.sh: A simple note of using mdadm.
