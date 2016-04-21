@@ -1,8 +1,7 @@
 #!/bin/bash
 # A simple note of using mdadm
-TYPE=$1
-DISK=$2
 RAID="/dev/md0"
+DEFAULT_DISK=""
 
 BLUE='\e[94m'
 CYAN='\e[96m'
@@ -86,9 +85,14 @@ function help(){
 	exit -1
 }
 
-if [ $# != "2" ]; then
+if [ $# -gt "2" ]; then
 	help
 fi
+
+TYPE=$1
+DISK=$2
+[ "x${DISK}" == "x" ] && [ "x${DEFAULT_DISK}" == "x" ] && help
+[ "x${DISK}" == "x" ] && DISK=${DEFAULT_DISK}
 
 case ${TYPE} in
 "parted")
